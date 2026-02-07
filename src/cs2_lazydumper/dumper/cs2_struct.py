@@ -1,7 +1,7 @@
 from typing import Generator
 
-from libs.ak_memkit import Address
-from dumper.cstruct import CStruct, CField, CData
+from ak_memkit import Address
+from .cstruct import CStruct, CField, CData
 
 
 

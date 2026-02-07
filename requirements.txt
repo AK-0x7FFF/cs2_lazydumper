@@ -1,0 +1,2 @@
+xxhash
+ak_memkit @ git+https://github.com/AK-0x7FFF/ak_memkit.git

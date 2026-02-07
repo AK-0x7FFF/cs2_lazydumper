@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC
 from typing import Self, Any, Callable
 
-from libs.ak_memkit import Address
+from ak_memkit import Address
 
 
 class CData:

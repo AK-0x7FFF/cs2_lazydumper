@@ -1,18 +1,29 @@
-from os import PathLike
+from os.path import abspath
 from pathlib import Path
 
-from dumper.dump import *
-from libs.ak_memkit import Process
+from cs2_lazydumper.dumper.dump import *
+from ak_memkit import Process
 
 
 
-def build(file_location: str | PathLike, file_name: str) -> None:
-    Process.create_global_instance("cs2.exe", "meow")
+def build_pyi() -> None:
+    Process.set_mode("meow").create("cs2.exe")
     schema_system = read_schema_system()
 
-    with open(Path(file_location) / f"{file_name}.pyi", "w") as f:
-        f.write("### Build From typehint_builder.py by AK32767 ###\n\n")
+    with open("schema.pyi", "w") as f:
+        f.write("### Build From typehint_builder.py ###\n\n")
+        f.write(f"from dumper.cs2_struct import SchemaSystem\n\n\n")
         f.write("class Schema:\n")
+        f.write("\n".join((
+            "    @classmethod",
+            "    def setup(cls, schema_system: SchemaSystem) -> None: ",
+            "        ...",
+            "",
+            "    @classmethod",
+            "    def load_all(cls) -> None:",
+            "        ...",
+            "\n",
+        )))
 
         for type_scope in read_type_scope(schema_system):
             f.write(f"    class {type_scope.name.replace(".", "_").replace(":", "_")}:\n")
@@ -28,7 +39,7 @@ def build(file_location: str | PathLike, file_name: str) -> None:
 
 
 def main() -> None:
-    build(".", "schema")
+    build_pyi("../..", "schema")
 
 
 if __name__ == '__main__':

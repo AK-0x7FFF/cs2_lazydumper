@@ -1,9 +1,9 @@
 from collections import namedtuple
-from itertools import count
 
-from dumper.cs2_struct import *
-from libs.ak_memkit import Pattern
-from libs.ak_memkit import Process
+from .cs2_struct import *
+from ak_memkit import Process, Pattern
+
+
 
 
 # TypeScope = namedtuple("TypeScope", ("struct", "name", "classes",))
@@ -76,7 +76,7 @@ def read_test():
 
 
 if __name__ == '__main__':
-    from libs.ak_memkit import Process
+    from ak_memkit import Process
     Process.create_global_instance("cs2.exe", "meow")
     read_test()
     Address.clear_cache()
